@@ -1,0 +1,281 @@
+
+/*
+Consider a Event POJO which has timestamp value of type LocalDateTime and a eventText of type String.
+
+Along with these the Event POJO has a Severity of enum type having values CRITICAL, MAJOR, MINOR, OK. 
+
+Critical being highest severity and Ok being lowest.
+
+ 
+
+Also we have a Repository which returns a Stream of these EventsT
+
+ 
+
+We need to write a reactive controller, which returns the Flux of events sorted in order of
+
+1. Severity ( higher the severity, come early in the Flux)
+
+2. timestamp ( recent events come early in Flux)
+
+*/
+
+
+
+
+
+Beans.java
+==========
+
+
+
+Enum severs
+
+{ CRITICAL=hignseverity, MAJOR=mediumseevrity, MINOR=lessseverity, OK=lowest};
+
+
+
+
+@Table("TimeStamps")
+
+
+@Entity
+
+
+class Timest
+
+{
+
+
+public LocalDateTime dob;
+public String severity;
+
+public String eventText;
+
+@Id
+@Genvalue
+public String id;
+
+public void getid()
+
+{
+
+
+return(id);
+}
+
+public vpoid setid(String id)
+
+{
+
+this.id=id;
+
+}
+
+
+
+
+public void TimeStamps1(LocalDateTime dob)
+
+{
+
+
+this.dob=dob;
+
+
+}
+
+
+
+
+public LocalDateTime  getTimeStamp()
+
+{
+
+
+return(dob);
+
+}
+
+/*
+public void setSeverity(Stri severity)
+
+{
+
+
+this.severity=severity;
+
+
+}
+
+
+
+
+public LocalDateTime  getSeverity()
+
+{
+
+
+return(severity);
+
+}
+
+*/
+
+
+
+public void setEventtext(String severity)
+
+{
+
+
+this.severity=severity;
+
+
+}
+
+
+
+
+public String getEveentText()
+
+{
+
+
+return(severity);
+
+}
+
+
+
+
+
+public class severss implements JpaRepository<Beans,String>
+
+
+{
+
+
+
+
+}
+
+
+
+
+@Service
+public class aservice
+
+
+{
+
+
+
+servss rep;
+
+
+public List SortedbySeverity(String severity)
+
+{
+
+
+Sorted sop = Sort.By("severity");
+
+List  l= rep.findbySeverity(sop);
+
+reurn(l);
+}
+
+
+
+
+public List Sortedbytimestamp(String timestamp)
+
+{
+
+
+Sorted sop = Sort.By("timeStamp");
+
+List  l= rep.findbySeverity(sop);
+
+return(l);
+}
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+]
+
+
+
+
+
+
+
+
+===============
+
+controller class
+
+@RestController
+
+@RequestMapping ("/Flow")
+
+public class ctrl
+
+{
+
+
+aservice s;
+
+
+@getMapping("/id/{severity}
+
+public List Severity(@PathVariable String severity)
+
+
+
+{
+
+
+
+List l= s.SortedbySeverity(severity);
+
+return(l);
+
+}
+
+
+@getMapping("/id/bytime}
+
+public List timestamp(  @PathVariable LocalDateTime time)
+
+
+
+{
+
+
+
+List l= s.Sortedbytimestamp(time);
+
+
+return(l);
+
+}
+
+
+
+
+
+
+}
