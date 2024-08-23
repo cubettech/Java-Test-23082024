@@ -1,0 +1,44 @@
+public static  void  main(String args[])
+
+{
+
+Map<String, Float> sub =  new HashMap<>();
+
+sub.add(38);
+sub.add(89);
+
+
+List <Examinee> lop = new ArrayList();
+
+lop.add(new Examinee(1,sub));
+
+lop.add(new Examinee(2,sub));
+
+
+
+
+
+
+Map  mp = lop.stream()
+
+.sorted(Map.Entry <String,String> ComparingBy(Examinee:rank))
+
+.filter(i-> lop.get(i).marks >=50)
+
+.Collect(Collectors.groupBy( Examinee:getame, Examinee:Examinee.getRank);
+
+
+Map  mp1 =  lop.stream()
+
+
+.sorted(Map.Entry <String,String> ComparingBy(Examinee:rank))
+
+.filter(i-> lop.get(i).marks <35)
+
+.Collect(Collectors.groupBy( Examinee:getame, Examinee:Examinee.getRank);
+
+
+System.out.prtintln( mp);
+System.out.prtintln( mp1);
+
+}
